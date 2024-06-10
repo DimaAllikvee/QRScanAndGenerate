@@ -48,6 +48,10 @@ This Python project is a comprehensive QR Code application that allows users to 
    pip install qrcode
    ```
 
+   
+pip install opencv-python pyzbar customtkinter pillow qrcode
+
+
 Ensure you have `pip` installed and accessible from your command line interface. Then, you can run the above commands to install the required packages. Once installed, you should be able to execute the provided code without any dependency issues.
 
 
