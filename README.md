@@ -20,7 +20,35 @@ This Python project is a comprehensive QR Code application that allows users to 
    - Built using `customtkinter`, the application provides a modern and intuitive interface.
    - The main window includes navigation buttons to switch between different functionalities (Home, Generate QR Code from URL, Generate QR Code from Text, Change Color, and About).
    - Includes a "About" section displaying developer information.
-  
+
+  To ensure that the provided code runs smoothly, you'll need to install the necessary Python packages using pip. Here's a list of packages required by the code:
+
+1. **OpenCV (`cv2`)**: Used for computer vision tasks, including webcam access and image manipulation.
+   ```
+   pip install opencv-python
+   ```
+
+2. **QReader**: A library for detecting and decoding QR codes from images.
+   ```
+   pip install qreader
+   ```
+
+3. **CustomTkinter (`customtkinter`)**: A customized version of the Tkinter GUI toolkit, offering additional features and aesthetics.
+   ```
+   pip install customtkinter
+   ```
+
+4. **Pillow (`PIL`)**: Python Imaging Library, used for image processing tasks such as resizing and displaying images.
+   ```
+   pip install Pillow
+   ```
+
+5. **QRCode**: A library for generating QR codes.
+   ```
+   pip install qrcode
+   ```
+
+Ensure you have `pip` installed and accessible from your command line interface. Then, you can run the above commands to install the required packages. Once installed, you should be able to execute the provided code without any dependency issues.
 
 
 
