@@ -1,5 +1,5 @@
 import cv2
-from qreader import QReader
+from pyzbar.pyzbar import decode
 import customtkinter as ctk
 from PIL import Image, ImageTk
 import qrcode
@@ -48,17 +48,23 @@ def on_generate_qr_code_text():
         print("Please enter text.")
 
 def scan_qr_code():
-    qr_reader = QReader()
     cap = cv2.VideoCapture(0)
     
+    if not cap.isOpened():
+        print("Не удалось открыть веб-камеру")
+        return
+
     while True:
         ret, frame = cap.read()
         if not ret:
             break
 
-        qr_code = qr_reader.detect_and_decode(frame)
-        if qr_code:
-            print("QR Code detected:", qr_code)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        decoded_objects = decode(gray)
+
+        for obj in decoded_objects:
+            qr_data = obj.data.decode("utf-8")
+            print("QR Code detected:", qr_data)
 
         cv2.imshow("QR Code Scanner", frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -73,7 +79,6 @@ def start_scan_qr_code():
 ctk.set_appearance_mode("System") # Режим отображения
 ctk.set_default_color_theme("blue") # Тема цвета
 
-
 app = ctk.CTk()
 app.geometry("600x600") # размер окна
 app.title("QR Code Scanner + Generate")
@@ -81,7 +86,6 @@ app.title("QR Code Scanner + Generate")
 # Главная страница
 frame_home = ctk.CTkFrame(app, corner_radius=15)
 frame_home.pack(pady=20, padx=20, fill="both", expand=True)
-
 
 # Заголовок
 header = ctk.CTkLabel(frame_home, text="QR Code Scanner IVKHK", font=("Arial", 24), corner_radius=15, height=50)
@@ -91,13 +95,11 @@ header.pack(pady=10)
 button1 = ctk.CTkButton(frame_home, text="Scan QR Code", corner_radius=10, command=start_scan_qr_code)
 button1.pack(pady=10)
 
-
 # Размеры фреймов
 frame_1 = ctk.CTkFrame(app, corner_radius=15)
 frame_2 = ctk.CTkFrame(app, corner_radius=15)
 frame_3 = ctk.CTkFrame(app, corner_radius=15)
 frame_about = ctk.CTkFrame(app, corner_radius=15)
-
 
 # Функции для переключения между фреймами
 def show_frame_home():
@@ -135,7 +137,6 @@ def show_frame_about():
     frame_3.pack_forget()
     frame_about.pack(pady=20, padx=20, fill="both", expand=True)
 
-
 # Фреймы
 ctk.CTkLabel(frame_1, text="QR Code(URL)", font=("Arial", 24)).pack(pady=20)
 ctk.CTkLabel(frame_2, text="QR Code(Text)", font=("Arial", 24)).pack(pady=20)
@@ -148,7 +149,6 @@ url_entry.pack(pady=10)
 text_entry = ctk.CTkEntry(frame_2, placeholder_text="Enter text", width=350)
 text_entry.pack(pady=10)
 
-
 # Метки для отображения QR-кодов
 qr_label_url = ctk.CTkLabel(frame_1, text="")
 qr_label_url.pack(pady=10)
@@ -156,15 +156,12 @@ qr_label_url.pack(pady=10)
 qr_label_text = ctk.CTkLabel(frame_2, text="")
 qr_label_text.pack(pady=10)
 
-
-
 # Кнопки внутри фреймов
 button_forframe = ctk.CTkButton(frame_1, text="Generate QR Code from URL", corner_radius=10, command=on_generate_qr_code_url)
 button_forframe.pack(pady=10)
 
 button_for = ctk.CTkButton(frame_2, text="Generate QR Code from Text", corner_radius=10, command=on_generate_qr_code_text)
 button_for.pack(pady=10)
-
 
 # Добавление опции для выбора цвета QR-кода
 selected_color = ctk.StringVar(value="black")
@@ -179,7 +176,6 @@ color_menu.pack(pady=10)
 # Фрейм "About"
 about_label = ctk.CTkLabel(frame_about, text="Developers:\n\nDima Allikvee\nJuri Allikvee\nKirill Kyrve\nNPTV23", font=("Arial", 18), justify="left")
 about_label.pack(pady=20, padx=20)
-
 
 # Навигационная панель
 navigation_frame = ctk.CTkFrame(app, width=140, corner_radius=15)
@@ -204,7 +200,6 @@ about_button.pack(pady=10, padx=10, anchor="n")
 # Системное меню
 system_menu = ctk.CTkOptionMenu(navigation_frame, values=["System", "Dark", "Light"], command=ctk.set_appearance_mode, corner_radius=10)
 system_menu.pack(pady=10, padx=10, anchor="s")
-
 
 # Запуск приложения
 show_frame_1()
