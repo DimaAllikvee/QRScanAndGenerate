@@ -55,6 +55,10 @@ pip install opencv-python pyzbar customtkinter pillow qrcode
 https://ivkhk-team-fdwr9l9s.atlassian.net/jira/software/projects/QKP/list
 
 
+
+python -m venv myvenv
+.\myvenv\Scripts\activate
+
 Ensure you have `pip` installed and accessible from your command line interface. Then, you can run the above commands to install the required packages. Once installed, you should be able to execute the provided code without any dependency issues.
 
 
