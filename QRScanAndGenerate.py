@@ -76,11 +76,12 @@ def scan_qr_code():
 def start_scan_qr_code():
     threading.Thread(target=scan_qr_code, daemon=True).start()
 
-ctk.set_appearance_mode("System") # Режим отображения
-ctk.set_default_color_theme("blue") # Тема цвета
+# Режим отображения
+ctk.set_appearance_mode("System") 
+ctk.set_default_color_theme("blue")
 
 app = ctk.CTk()
-app.geometry("600x600") # размер окна
+app.geometry("600x600")
 app.title("QR Code Scanner + Generate")
 
 # Главная страница
@@ -91,7 +92,7 @@ frame_home.pack(pady=20, padx=20, fill="both", expand=True)
 header = ctk.CTkLabel(frame_home, text="QR Code Scanner IVKHK", font=("Arial", 24), corner_radius=15, height=50)
 header.pack(pady=10)
 
-# Кнопки
+
 button1 = ctk.CTkButton(frame_home, text="Scan QR Code", corner_radius=10, command=start_scan_qr_code)
 button1.pack(pady=10)
 
@@ -200,7 +201,7 @@ about_button.pack(pady=10, padx=10, anchor="n")
 # Системное меню
 system_menu = ctk.CTkOptionMenu(navigation_frame, values=["System", "Dark", "Light"], command=ctk.set_appearance_mode, corner_radius=10)
 system_menu.pack(pady=10, padx=10, anchor="s")
+    
 
-# Запуск приложения
 show_frame_1()
 app.mainloop()
