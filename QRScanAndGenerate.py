@@ -8,7 +8,6 @@ import threading
 def generate_qr_code(data, color="black", background="white", size=300):
     qr = qrcode.QRCode(
         version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
         box_size=10,
         border=4,
     )
@@ -20,14 +19,13 @@ def generate_qr_code(data, color="black", background="white", size=300):
     
     return img
 
-def save_qr_code(img, filename):
-    img.save(filename)
-    print(f"QR code saved as {filename}")
 
 def show_qr_code(img, label):
     img = ImageTk.PhotoImage(img)
     label.configure(image=img)
     label.image = img
+
+
 
 def on_generate_qr_code_url():
     url = url_entry.get()
@@ -88,7 +86,7 @@ app.title("QR Code Scanner + Generate")
 frame_home = ctk.CTkFrame(app, corner_radius=15)
 frame_home.pack(pady=20, padx=20, fill="both", expand=True)
 
-# Заголовок
+
 header = ctk.CTkLabel(frame_home, text="QR Code Scanner IVKHK", font=("Arial", 24), corner_radius=15, height=50)
 header.pack(pady=10)
 
@@ -156,6 +154,7 @@ qr_label_url.pack(pady=10)
 
 qr_label_text = ctk.CTkLabel(frame_2, text="")
 qr_label_text.pack(pady=10)
+
 
 # Кнопки внутри фреймов
 button_forframe = ctk.CTkButton(frame_1, text="Generate QR Code from URL", corner_radius=10, command=on_generate_qr_code_url)
