@@ -96,7 +96,7 @@ header.pack(pady=10)
 button1 = ctk.CTkButton(frame_home, text="Scan QR Code", corner_radius=10, command=start_scan_qr_code)
 button1.pack(pady=10)
 
-# Размеры фреймов
+
 frame_1 = ctk.CTkFrame(app, corner_radius=15)
 frame_2 = ctk.CTkFrame(app, corner_radius=15)
 frame_3 = ctk.CTkFrame(app, corner_radius=15)
